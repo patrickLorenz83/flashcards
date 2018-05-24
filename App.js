@@ -1,5 +1,5 @@
 import React                    from 'react'
-import { StyleSheet, View }     from 'react-native'
+import { View }                 from 'react-native'
 import MyStatusBar              from './components/navigation/MyStatusBar'
 import { purple }               from './utils/colors'
 import { setDummyData }         from './utils/decks'
@@ -22,12 +22,3 @@ export default class App extends React.Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
