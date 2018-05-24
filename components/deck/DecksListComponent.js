@@ -1,7 +1,7 @@
 import React, { Component }                               from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import * as CardsApi                                      from '../../api/CardsApi'
-import { gray, silver, white }                            from '../../utils/colors'
+import { gray }                                           from '../../utils/colors'
 import globalStyles                                       from '../../utils/globalStyles'
 
 export default class DecksListComponent extends Component {
@@ -16,7 +16,7 @@ export default class DecksListComponent extends Component {
 
     async shouldComponentUpdate() {
         const fetchedDecks = await CardsApi.decks()
-        if ( JSON.stringify(this.state.decks) !== JSON.stringify(fetchedDecks.map(deck => ({
+        if ( fetchedDecks && JSON.stringify(this.state.decks) !== JSON.stringify(fetchedDecks.map(deck => ({
             title: deck.title,
             count: deck.questions.length
         }))) ) {

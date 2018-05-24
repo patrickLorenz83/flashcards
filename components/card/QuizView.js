@@ -48,7 +48,6 @@ export default class QuizView extends Component {
     }
 
     render() {
-        console.log('quiz state', this.state)
         const { showAnswer, quizIndex } = this.state
 
         if ( quizIndex >= this.state.questions.length ) {
