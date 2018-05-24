@@ -4,7 +4,7 @@ export const decks = () => fetchDecks()
 
 export const deck = async (title) => {
     const decksToFilter = await  decks()
-    return decksToFilter.filter(deck => deck.title === title)[0]
+    return decksToFilter.filter(deck => deck.title === title).shift()
 }
 
 export const addDeck = async (title) => {
@@ -13,9 +13,9 @@ export const addDeck = async (title) => {
     setDecks(newDecks)
 }
 
-export const addCard = (title, card) => {
-    const allDecksToUpdate = decks()
-    allDecksToUpdate.filter(deck => deck.title === title).questions.push(card)
+export const addCard = async (title, card) => {
+    const allDecksToUpdate = await decks()
+    allDecksToUpdate.filter(deck => deck.title === title).shift().questions.push(card)
     setDecks(allDecksToUpdate)
 }
 

@@ -3,6 +3,7 @@ import DeckView                 from '../deck/DeckView'
 import { createStackNavigator } from 'react-navigation'
 import { purple, white }        from '../../utils/colors'
 import NewCardView              from '../card/NewCardView'
+import QuizView                 from '../card/QuizView'
 
 const MainNavigator = createStackNavigator({
     Home: {
@@ -23,6 +24,16 @@ const MainNavigator = createStackNavigator({
     NewCardView: {
         screen: NewCardView,
         navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+            }
+        }
+    },
+    QuizView: {
+        screen: QuizView,
+        navigationOptions: {
+            title: 'Quiz',
             headerTintColor: white,
             headerStyle: {
                 backgroundColor: purple,

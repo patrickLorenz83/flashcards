@@ -9,15 +9,29 @@ export default class DecksListComponent extends Component {
         decks: []
     }
 
-    async componentDidMount() {
-        await this.readDecks()
+    componentDidMount() {
+        this.readDecks()
     }
 
-    async componentWillReceiveProps() {
-        await this.readDecks()
+    async shouldComponentUpdate() {
+        const fetchedDecks = await CardsApi.decks()
+        if ( this.state.decks !== fetchedDecks.map(deck => ({
+            title: deck.title,
+            count: deck.questions.length
+        })) ) {
+            this.readDecks()
+            return true
+        }
+        return false
     }
 
-    async readDecks() {
+
+    /**
+     * Fetching the decks and adding the required data to the state.
+     *
+     * @returns {Promise<void>}
+     */
+    readDecks = async () => {
         const decksList = await CardsApi.decks()
         decksList && decksList.length > 0 && this.setState(state => (
             {
@@ -31,12 +45,15 @@ export default class DecksListComponent extends Component {
     }
 
     render() {
+        console.log('state', this.state)
         const decks = this.state.decks.map(deck => (
             <TouchableOpacity key={ deck.title }
                               style={ [ styles.decks ] }
                               onPress={ () => this.props.navigation.navigate(
                                   'DeckView',
-                                  { title: deck.title}
+                                  {
+                                      title: deck.title
+                                  }
                               ) }>
                 <Text style={ styles.text }>{ deck.title }</Text>
                 <Text style={ [ styles.text, { color: gray } ] }>{ deck.count } Cards</Text>
