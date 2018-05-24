@@ -45,7 +45,6 @@ export default class DecksListComponent extends Component {
     }
 
     render() {
-        console.log('state', this.state)
         const decks = this.state.decks.map(deck => (
             <TouchableOpacity key={ deck.title }
                               style={ [ styles.decks ] }

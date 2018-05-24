@@ -9,7 +9,10 @@ export default class NewDeckView extends Component {
         text: ''
     }
     handleSubmit = () =>{
-        addDeck(this.state.text)
+        addDeck(this.state.text).then(() => {
+                this.props.navigation.navigate('DeckView', { title: this.state.text })
+            }
+        )
     }
 
     render() {

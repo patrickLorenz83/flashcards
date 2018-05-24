@@ -36,9 +36,10 @@ class NewCardView extends Component {
                     marginTop: 10
                 } }
                                   onPress={ () => {
-                                      addCard(title, this.state)
-                                      refresh()
-                                      this.props.navigation.navigate('Home')
+                                      addCard(title, this.state).then(() => {
+                                          refresh && refresh()
+                                          this.props.navigation.navigate('DeckView', { title })
+                                      })
                                   } }>
                     <Text style={ { color: white, textAlign: 'center' } }>Add Card</Text>
                 </TouchableOpacity>
