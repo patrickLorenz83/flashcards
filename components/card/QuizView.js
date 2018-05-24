@@ -1,6 +1,7 @@
 import React, { Component }             from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { green, red, white }            from '../../utils/colors'
+import DoneComponent                    from './DoneComponent'
 
 export default class QuizView extends Component {
 
@@ -30,16 +31,31 @@ export default class QuizView extends Component {
         }))
     }
 
+    resetQuiz = () => {
+        this.setState(state => ({
+            ...state,
+            correctAnswers: 0,
+            quizIndex: 0,
+            showAnswer: false,
+            questions: [
+                ...this.state.questions.map(question => ({
+                    ...question,
+                    correct: undefined
+                }))
+            ],
+        }))
+    }
+
     render() {
         console.log('quiz state', this.state)
         const { showAnswer, quizIndex } = this.state
 
         if ( quizIndex >= this.state.questions.length ) {
-            return <View>
-                <Text>Done</Text>
-                <Text>{ this.state.correctAnswers } Correct answers
-                    of { this.state.questions.length } questions!</Text>
-            </View>
+            return <DoneComponent correctAnswers={ this.state.correctAnswers }
+                                  totalAnswers={ this.state.questions.length }
+                                  deckTitle={ this.state.deckTitle }
+                                  restartQuiz={ this.resetQuiz }
+                                  { ...this.props }/>
         }
 
         return (
