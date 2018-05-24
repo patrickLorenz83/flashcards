@@ -1,6 +1,6 @@
-import React                             from 'react'
-import { Text, TouchableOpacity, View }  from 'react-native'
-import { lightPurp, purple, red, white } from '../../utils/colors'
+import React                            from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { lightPurp, purple, white }     from '../../utils/colors'
 
 const DoneComponent = ({ deckTitle, correctAnswers, totalAnswers, restartQuiz, ...props }) => (
     <View>
