@@ -15,11 +15,11 @@ export default class DecksListComponent extends Component {
 
     async shouldComponentUpdate() {
         const fetchedDecks = await CardsApi.decks()
-        if ( this.state.decks !== fetchedDecks.map(deck => ({
+        if ( JSON.stringify(this.state.decks) !== JSON.stringify(fetchedDecks.map(deck => ({
             title: deck.title,
             count: deck.questions.length
-        })) ) {
-            this.readDecks()
+        }))) ) {
+            this.readDecks(fetchedDecks)
             return true
         }
         return false
@@ -31,8 +31,8 @@ export default class DecksListComponent extends Component {
      *
      * @returns {Promise<void>}
      */
-    readDecks = async () => {
-        const decksList = await CardsApi.decks()
+    readDecks = async (decks) => {
+        const decksList = decks ? decks: await CardsApi.decks()
         decksList && decksList.length > 0 && this.setState(state => (
             {
                 ...state,
@@ -52,7 +52,8 @@ export default class DecksListComponent extends Component {
                               onPress={ () => this.props.navigation.navigate(
                                   'DeckView',
                                   {
-                                      title: deck.title
+                                      title: deck.title,
+                                      refresh: () => this.readDecks()
                                   }
                               ) }>
                 <Text style={ styles.text }>{ deck.title }</Text>

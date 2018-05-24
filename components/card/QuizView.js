@@ -5,11 +5,11 @@ export default class QuizView extends Component {
 
     state = {
         deckTitle: '',
-        questions: {
+        questions: [ {
             answer: '',
             question: '',
             correct: undefined
-        }
+        } ]
     }
 
     componentDidMount() {
@@ -24,6 +24,7 @@ export default class QuizView extends Component {
         console.log('quiz state', this.state)
         return (
             <View>
+                <Text>{ this.state.questions.filter(question => question.correct !== undefined).length } / { this.state.questions.length }</Text>
                 <Text>QuizView</Text>
             </View>
         )

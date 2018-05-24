@@ -13,7 +13,7 @@ class NewCardView extends Component {
     }
 
     render() {
-        const { title } = this.props.navigation.state.params
+        const { title, refresh } = this.props.navigation.state.params
         return (
             <View style={ { flex: 1 } }>
                 <KeyboardAvoidingView behavior="padding">
@@ -37,6 +37,7 @@ class NewCardView extends Component {
                 } }
                                   onPress={ () => {
                                       addCard(title, this.state)
+                                      refresh()
                                       this.props.navigation.navigate('Home')
                                   } }>
                     <Text style={ { color: white, textAlign: 'center' } }>Add Card</Text>
