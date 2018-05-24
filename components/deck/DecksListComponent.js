@@ -1,7 +1,8 @@
 import React, { Component }                               from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import * as CardsApi                                      from '../../api/CardsApi'
-import { gray }                                           from '../../utils/colors'
+import { gray, silver, white }                            from '../../utils/colors'
+import globalStyles                                       from '../../utils/globalStyles'
 
 export default class DecksListComponent extends Component {
 
@@ -47,7 +48,7 @@ export default class DecksListComponent extends Component {
     render() {
         const decks = this.state.decks.map(deck => (
             <TouchableOpacity key={ deck.title }
-                              style={ [ styles.decks ] }
+                              style={ [ globalStyles.deck ] }
                               onPress={ () => this.props.navigation.navigate(
                                   'DeckView',
                                   {
@@ -71,21 +72,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%'
-    },
-    decks: {
-        flex: 1,
-        marginBottom: 20,
-        paddingTop: 10,
-        paddingBottom: 10,
-        borderWidth: 1,
-        borderRadius: 3,
-        shadowRadius: 3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.40)',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
     },
     text: {
         textAlign: 'center',

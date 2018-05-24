@@ -1,7 +1,8 @@
 import React, { Component }                                              from 'react'
 import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { purple, white }                                                 from '../../utils/colors'
+import { green, purple, white }                                          from '../../utils/colors'
 import { addCard }                                                       from '../../api/CardsApi'
+import globalStyles                                                      from '../../utils/globalStyles'
 
 class NewCardView extends Component {
 
@@ -15,26 +16,21 @@ class NewCardView extends Component {
     render() {
         const { title, refresh } = this.props.navigation.state.params
         return (
-            <View style={ { flex: 1 } }>
+            <View style={ globalStyles.screenContainer }>
                 <KeyboardAvoidingView behavior="padding">
-                    <Text>Question</Text>
+                    <Text style={ globalStyles.textInputLabel }>Question</Text>
                     <TextInput onChangeText={ (text) => this.setState({ question: text }) }
                                placeholder="Enter the question"
-                               style={ { borderWidth: 1, height: 30 } }
+                               style={ [globalStyles.textInput, globalStyles.textShadow] }
                                value={ this.state.question }/>
 
-                    <Text>Answer</Text>
+                    <Text style={ globalStyles.textInputLabel }>Answer</Text>
                     <TextInput onChangeText={ (text) => this.setState({ answer: text }) }
                                placeholder="Enter the answer"
-                               style={ { borderWidth: 1, height: 30 } }
+                               style={ [globalStyles.textInput, globalStyles.textShadow] }
                                value={ this.state.answer }/>
                 </KeyboardAvoidingView>
-                <TouchableOpacity style={ {
-                    backgroundColor: purple,
-                    height: 80,
-                    justifyContent: 'center',
-                    marginTop: 10
-                } }
+                <TouchableOpacity style={ [ globalStyles.button, globalStyles.buttonShadow, { backgroundColor: purple } ] }
                                   onPress={ () => {
                                       addCard(title, this.state).then(() => {
                                           refresh && refresh()

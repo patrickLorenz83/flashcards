@@ -1,7 +1,8 @@
 import React, { Component }                                              from 'react'
 import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { addDeck }                                                       from '../../api/CardsApi'
-import { purple, white }                                                 from '../../utils/colors'
+import { green, purple, white }                                          from '../../utils/colors'
+import globalStyles                                                      from '../../utils/globalStyles'
 
 export default class NewDeckView extends Component {
 
@@ -18,24 +19,14 @@ export default class NewDeckView extends Component {
     render() {
 
         return (
-            <View style={ {
-                flex: 1,
-                marginLeft: 30,
-                marginRight: 30,
-                padding: 20
-            } }>
+            <View style={ globalStyles.screenContainer }>
                 <KeyboardAvoidingView behavior="padding">
                     <TextInput onChangeText={ (text) => this.setState({ text }) }
                                placeholder="Enter the new deck name"
-                               style={ { borderWidth: 1, height: 30 } }
+                               style={ [globalStyles.textInput, globalStyles.textShadow] }
                                value={ this.state.text }/>
                 </KeyboardAvoidingView>
-                <TouchableOpacity style={ {
-                    backgroundColor: purple,
-                    height: 80,
-                    justifyContent: 'center',
-                    marginTop: 10
-                } }
+                <TouchableOpacity style={ [ globalStyles.button, globalStyles.buttonShadow, { backgroundColor: purple } ] }
                                   onPress={ this.handleSubmit }>
                     <Text style={ { color: white, textAlign: 'center' } }>Create new deck</Text>
                 </TouchableOpacity>

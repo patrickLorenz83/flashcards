@@ -1,7 +1,8 @@
 import React, { Component }             from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { green, red, white }            from '../../utils/colors'
+import { green, lightPurp, red, white } from '../../utils/colors'
 import DoneComponent                    from './DoneComponent'
+import globalStyles                     from '../../utils/globalStyles'
 
 export default class QuizView extends Component {
 
@@ -51,28 +52,27 @@ export default class QuizView extends Component {
         const { showAnswer, quizIndex } = this.state
 
         if ( quizIndex >= this.state.questions.length ) {
-            return <DoneComponent correctAnswers={ this.state.correctAnswers }
-                                  totalAnswers={ this.state.questions.length }
-                                  deckTitle={ this.state.deckTitle }
-                                  restartQuiz={ this.resetQuiz }
-                                  { ...this.props }/>
+            return (
+                <View style={ globalStyles.screenContainer }>
+                    <DoneComponent correctAnswers={ this.state.correctAnswers }
+                                   totalAnswers={ this.state.questions.length }
+                                   deckTitle={ this.state.deckTitle }
+                                   restartQuiz={ this.resetQuiz }
+                                   { ...this.props }/>
+                    }
+                </View>
+            )
         }
 
         return (
-            <View>
+            <View style={ globalStyles.screenContainer }>
                 <Text>{ this.state.questions.filter(question => question.correct !== undefined).length } / { this.state.questions.length }</Text>
-                <Text>QuizView</Text>
                 <View>
-                    <Text>Question</Text>
-                    <Text>{ this.state.questions[ quizIndex ].question }</Text>
+                    <Text style={ globalStyles.textInputLabel }>Question</Text>
+                    <Text style={ { marginTop: 5 } }>{ this.state.questions[ quizIndex ].question }</Text>
                     {
                         !showAnswer &&
-                        < TouchableOpacity style={ {
-                            backgroundColor: green,
-                            height: 80,
-                            justifyContent: 'center',
-                            marginTop: 10
-                        } }
+                        < TouchableOpacity style={ [ globalStyles.button, globalStyles.buttonShadow, { backgroundColor: lightPurp } ] }
                                            onPress={ () => {
                                                this.setState(state => ({
                                                    ...state,
@@ -87,14 +87,16 @@ export default class QuizView extends Component {
                 {
                     showAnswer &&
                     <View>
-                        <Text>Answer</Text>
-                        <Text>{ this.state.questions[ quizIndex ].answer }</Text>
-                        < TouchableOpacity style={ {
-                            backgroundColor: green,
-                            height: 80,
-                            justifyContent: 'center',
-                            marginTop: 10
-                        } }
+                        <Text style={ globalStyles.textInputLabel }>Answer</Text>
+                        <Text style={ { marginTop: 5 } }>{ this.state.questions[ quizIndex ].answer }</Text>
+                        <View style={ {
+                            flex: 1,
+                            marginRight: 10,
+                            marginLeft: 10,
+                            justifyContent: 'space-around',
+                            flexDirection: 'row'
+                        } }>
+                            < TouchableOpacity style={ [ globalStyles.button, globalStyles.buttonShadow, { backgroundColor: green } ] }
                                            onPress={ () => {
                                                this.setState(state => ({
                                                    ...state,
@@ -109,13 +111,8 @@ export default class QuizView extends Component {
                                            } }>
                             <Text style={ { color: white, textAlign: 'center' } }>correct</Text>
                         </TouchableOpacity>
-                        < TouchableOpacity style={ {
-                            backgroundColor: red,
-                            height: 80,
-                            justifyContent: 'center',
-                            marginTop: 10
-                        } }
-                                           onPress={ () => {
+                            < TouchableOpacity style={ [ globalStyles.button, globalStyles.buttonShadow, { backgroundColor: red } ] }
+                                               onPress={ () => {
                                                this.setState(state => ({
                                                    ...state,
                                                    questions: [
@@ -128,6 +125,7 @@ export default class QuizView extends Component {
                                            } }>
                             <Text style={ { color: white, textAlign: 'center' } }>incorrect</Text>
                         </TouchableOpacity>
+                        </View>
                     </View>
                 }
             </View>
