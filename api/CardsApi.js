@@ -2,7 +2,10 @@ import { fetchDecks, setDecks } from '../utils/decks'
 
 export const decks = () => fetchDecks()
 
-export const deck = (title) => (decks.filter(deck => deck.title === title))
+export const deck = async (title) => {
+    const decksToFilter = await  decks()
+    return decksToFilter.filter(deck => deck.title === title)[0]
+}
 
 export const addDeck = async (title) => {
     let newDecks = await decks()

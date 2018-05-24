@@ -1,8 +1,8 @@
 import React                        from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
-import DecksListView                from './views/DecksListView'
-import NewDeckView                  from './views/NewDeckView'
-import { purple, white }            from '../utils/colors'
+import DecksListView                from '../deck/DecksListView'
+import NewDeckView                  from '../deck/NewDeckView'
+import { purple, white }            from '../../utils/colors'
 import { FontAwesome, Ionicons }    from '@expo/vector-icons'
 
 const Tabs = createBottomTabNavigator({

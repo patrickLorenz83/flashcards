@@ -1,21 +1,23 @@
 import React                from 'react'
 import { StyleSheet, View } from 'react-native'
-import Tabs                 from './components/Tabs'
-import MyStatusBar          from './components/MyStatusBar'
-import { purple }           from './utils/colors'
-import { setDummyData }     from './utils/decks'
+
+import MyStatusBar      from './components/navigation/MyStatusBar'
+import { purple }       from './utils/colors'
+import { setDummyData } from './utils/decks'
+import MainNavigator    from './components/navigation/MainNavigator'
 
 export default class App extends React.Component {
 
     componentWillMount(){
-        //setDummyData()
+        setDummyData()
     }
+
 
     render() {
         return (
             <View style={ { flex: 1 } }>
                 <MyStatusBar backgroundColor={purple} barStyle="light-content"/>
-                <Tabs/>
+                <MainNavigator/>
             </View>
         )
     }

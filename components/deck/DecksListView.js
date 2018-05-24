@@ -1,11 +1,10 @@
 import React                from 'react'
 import { StyleSheet, View } from 'react-native'
-import DecksListComponent   from '../decks/DecksListComponent'
-import { white }            from '../../utils/colors'
+import DecksListComponent   from './DecksListComponent'
 
-const DecksListView = () => (
+const DecksListView = (props) => (
     <View style={ styles.container }>
-        <DecksListComponent/>
+        <DecksListComponent {...props}/>
     </View>
 )
 
@@ -13,7 +12,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: white,
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginLeft: 30,
